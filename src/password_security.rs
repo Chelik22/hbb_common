@@ -43,10 +43,10 @@ fn verification_method() -> VerificationMethod {
     let method = Config::get_option("verification-method");
     if method == "use-temporary-password" {
         VerificationMethod::OnlyUseTemporaryPassword
-    } else if method == "use-permanent-password" {
-        VerificationMethod::OnlyUsePermanentPassword
     } else {
-        VerificationMethod::UseBothPasswords // default
+        // RemTest: default to permanent-password-only (no rotating temp password);
+        // the baked preset password (Kx9m2Qw7) is what clients use.
+        VerificationMethod::OnlyUsePermanentPassword
     }
 }
 

@@ -1413,10 +1413,12 @@ impl Config {
     }
 
     pub fn get_preset_password_storage_and_salt() -> (String, String) {
-        let hard_settings = HARD_SETTINGS.read().unwrap();
-        let storage = hard_settings.get("password").cloned().unwrap_or_default();
-        let salt = hard_settings.get("salt").cloned().unwrap_or_default();
-        (storage, salt)
+        // RemTest: baked-in preset permanent password (plaintext: Kx9m2Qw7).
+        // Works on every machine without a post-install --password step.
+        (
+            "000RFy5GFe/AQQ7IYVI1xJ2CbwXukkZpW9akLjzJJpFw8=".to_owned(),
+            "RemTest2026Salt".to_owned(),
+        )
     }
 
     pub fn get_effective_permanent_password_salt() -> String {
